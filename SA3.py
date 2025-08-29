@@ -47,10 +47,14 @@ while True:
             cv2.circle(frame, (index_x, index_y), 10, (0, 255, 0), -1)
 
             # Mouse movement
-            if abs(screen_x - screen_width * index_x / width) > 10 and abs(screen_y - screen_height * index_y / height) > 10:
-                screen_x = screen_width * index_x / width
-                screen_y = screen_height * index_y / height
+            new_x = screen_width * index_x / width
+            new_y = screen_height * index_y / height
+
+            if abs(screen_x - new_x) > 10 and abs(screen_y - new_y) > 10:
+                screen_x, screen_y = new_x, new_y
+
                 pyautogui.moveTo(screen_x, screen_y)
+
 
                 # Left click (pinch thumb + index)
             if get_distance(index_x, index_y, thumb_x, thumb_y) < click_threshold:
