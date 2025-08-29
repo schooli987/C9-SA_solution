@@ -16,7 +16,7 @@ hands = mp_hands.Hands(max_num_hands=1)
 
 # Screen size
 screen_width, screen_height = pyautogui.size()
-
+screen_x, screen_y = 0, 0
 
 
 while True:
@@ -42,9 +42,14 @@ while True:
             cv2.circle(frame, (index_x, index_y), 10, (0, 255, 0), -1)
 
             # Move mouse
-            screen_x = screen_width * index_x / width
-            screen_y = screen_height * index_y / height
-            pyautogui.moveTo(screen_x, screen_y)
+               
+            new_x = screen_width * index_x / width
+            new_y = screen_height * index_y / height
+
+            if abs(screen_x - new_x) > 10 and abs(screen_y - new_y) > 10:
+                screen_x, screen_y = new_x, new_y
+
+                pyautogui.moveTo(screen_x, screen_y)
 
           
 
